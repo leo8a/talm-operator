@@ -1,0 +1,17 @@
+- name: Create temporal directory
+  tempfile:
+    state: directory
+    suffix: talm
+  register: talm_tempdir
+
+- name: Clone openshift-kni/cluster-group-upgrades-operator repo
+  git:
+    repo: https://github.com/openshift-kni/cluster-group-upgrades-operator.git
+    dest: "{{ talm_tempdir.path }}/talm"
+    force: yes
+    update: yes
+
+- name: Make TALM operator
+  make:
+    chdir: "{{ talm_tempdir.path }}/talm"
+    target: deploy

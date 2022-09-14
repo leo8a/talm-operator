@@ -1,0 +1,35 @@
+- name: Check TALM deployment (timeout ~5 mins)
+  k8s:
+    api_version: apps/v1
+    kind: Deployment
+    name: cluster-group-upgrades-controller-manager
+    namespace: openshift-cluster-group-upgrades
+    state: present
+    wait: true
+    wait_timeout: 300
+    wait_condition:
+      type: Available
+      status: "True"
+      reason: MinimumReplicasAvailable
+  register: talo_deploy
+  retries: 3
+  delay: 10
+  until: talo_deploy is not failed
+
+- name: Check TALM service account objects (timeout ~5 mins)
+  k8s:
+    api_version: v1
+    kind: ServiceAccount
+    name: "{{ item }}"
+    namespace: openshift-cluster-group-upgrades
+    state: present
+    wait: true
+    wait_timeout: 300
+  loop:
+    - builder
+    - deployer
+    - cluster-group-upgrades-controller-manager
+  register: talo_sa
+  retries: 3
+  delay: 10
+  until: talo_sa is not failed

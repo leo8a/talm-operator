@@ -1,0 +1,10 @@
+---
+# Setup/install tasks
+- include_tasks: install-talm-olm.yml
+  when: install_method == "olm"
+
+- include_tasks: install-talm-source.yml
+  when: install_method == "source"
+
+# Check TALM installation
+- include_tasks: check-talm-install.yml

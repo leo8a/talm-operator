@@ -1,0 +1,5 @@
+- name: Create TALM subscription
+  k8s:
+    state: present
+    template: "talm-operator.yaml.j2"
+    wait: true

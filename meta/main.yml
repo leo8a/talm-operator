@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Leonardo Ochoa Aday
+  description: Role to install TALM operator in OpenShift clusters.
+  company: Red Hat, Inc.
+  license: Apache 2.0 license
+  min_ansible_version: 2.1
+#  platforms:
+#    - name: OpenShift
+#      versions:
+#        - 4.10.z
+  galaxy_tags:
+    - telco
+    - ran
+    - k8s
+    - kubernetes
+    - infrastructure
+    - openshift
+
+dependencies: []
+
+collections:
+  - kubernetes.core
