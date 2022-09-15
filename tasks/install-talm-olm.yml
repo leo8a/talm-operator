@@ -1,3 +1,17 @@
+---
+- name: Get TALM info from PackageManifest
+  k8s_info:
+    api_version: packages.operators.coreos.com/v1
+    kind: PackageManifest
+    name: topology-aware-lifecycle-manager
+    namespace: openshift-operators
+  register: talm_object
+
+- name: Set defaultChannel and catalogSource
+  set_fact:
+    operator_channel: "{{ talm_object.resources | json_query('[0].status.defaultChannel') }}"
+    catalog_source: "{{ talm_object.resources | json_query('[0].status.catalogSource') }}"
+
 - name: Create TALM subscription
   k8s:
     state: present

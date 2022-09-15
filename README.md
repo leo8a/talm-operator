@@ -8,8 +8,8 @@ Installs the [TALM](https://github.com/openshift-kni/cluster-group-upgrades-oper
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    install_method: "olm"                    # -> available options: olm, source
-    catalog_source: "redhat-operators"
+    talm:
+      install_method: "olm"                    # -> available options: olm, source
 
 ## Dependencies
 
@@ -21,15 +21,6 @@ This role requires the `kubernetes.core` collection, and have been tested on an 
       gather_facts: false
       roles:
         - leo8a.talm_operator
-
-For disconnected environments, the `catalog_source` var can be adjusted as follows:
-
-    - hosts: localhost
-      gather_facts: false
-      roles:
-        - leo8a.talm_operator
-      vars:
-        - catalog_source: "redhat-operator-index"
 
 ## License
 

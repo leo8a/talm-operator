@@ -1,3 +1,4 @@
+---
 - name: Create temporal directory
   tempfile:
     state: directory

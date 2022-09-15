@@ -6,7 +6,7 @@ metadata:
   name: topology-aware-lifecycle-manager
   namespace: openshift-operators
 spec:
-  channel: stable
+  channel: {{ operator_channel }}
   installPlanApproval: Automatic
   name: topology-aware-lifecycle-manager
   source: {{ catalog_source }}
